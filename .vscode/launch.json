@@ -1,0 +1,71 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Develop",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "toolArgs": ["--flavor", "dev", "--dart-define"]
+    },
+    {
+      "name": "Debug Qc",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "toolArgs": ["--flavor", "qc", "--dart-define"]
+    },
+    {
+      "name": "Debug Production",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "toolArgs": ["--flavor", "prod", "--dart-define"]
+    },
+    {
+      "name": "Profile Develop",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "flutterMode": "profile",
+      "toolArgs": ["--flavor", "dev", "--dart-define"]
+    },
+    {
+      "name": "Profile Qc",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "flutterMode": "profile",
+      "toolArgs": ["--flavor", "qc", "--dart-define"]
+    },
+    {
+      "name": "Profile Production",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "flutterMode": "profile",
+      "toolArgs": ["--flavor", "prod", "--dart-define"]
+    },
+    {
+      "name": "Release Develop",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "toolArgs": ["--flavor", "dev", "--release", "--dart-define"]
+    },
+    {
+      "name": "Release Qc",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "toolArgs": ["--flavor", "qc", "--release", "--dart-define"]
+    },
+    {
+      "name": "Release Production",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "toolArgs": ["--flavor", "prod", "--release", "--dart-define"]
+    }
+  ]
+}
