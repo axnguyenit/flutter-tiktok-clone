@@ -1,0 +1,48 @@
+name: Build & Upload to Firebase App Distribution
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: "11"
+      - name: Decode google-services.json
+        env: 
+          GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
+        run: echo "$GOOGLE_SERVICES" > android/app/google-services.json
+      - name: Decode GoogleService-Info.plist
+        env:
+          GOOGLE_SERVICE_INFO: ${{ secrets.GOOGLE_SERVICE_INFO }}
+        run : echo "$GOOGLE_SERVICE_INFO" > ios/Runner/GoogleService-Info.plist
+      - name: Decode .env
+        env:
+          ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
+        run : echo "$ENVIRONMENT" > .env
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+      - run: flutter pub get
+      - run: flutter build apk --dart-define env=$(echo $(cat .env | tr '\n' '|')) --flavor prod --release
+      - uses: actions/upload-artifact@v1
+        with:
+          name: release-apk
+          path: build/app/outputs/apk/release/app-release.apk
+      - name: Upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+            appId: ${{secrets.APP_ID}}
+            token: ${{secrets.FIREBASE_TOKEN}}
+            groups: Tester
+            file: build/app/outputs/apk/release/app-release.apk
