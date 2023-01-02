@@ -1,9 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'broadcast.dart';
-import 'event_bus.dart';
+import 'package:shared/shared.dart';
 
 abstract class BaseBloc<E extends Object, S extends Equatable>
     extends Bloc<E, S> {
@@ -21,6 +19,8 @@ abstract class BaseBloc<E extends Object, S extends Equatable>
         closeWithBlocKey != const Key('force_to_dispose_bloc')) {
       return;
     }
+
+    log.trace('BLOC WITH KEY $key IS DISPOSED');
 
     EventBus().unsubscribes(key);
     EventBus().unhandle(key);

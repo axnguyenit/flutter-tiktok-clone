@@ -34,8 +34,8 @@ class XIconButton extends StatelessWidget {
         iconSize: iconSize ?? 22,
         padding: EdgeInsets.zero,
         constraints: BoxConstraints(
-          minWidth: minWidth ?? 45,
-          minHeight: minWidth ?? 45,
+          minWidth: minWidth ?? 36,
+          minHeight: minWidth ?? 36,
         ),
         icon: Icon(
           icon,

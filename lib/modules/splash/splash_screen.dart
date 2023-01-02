@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok/constants/constants.dart';
+import 'package:tiktok/global/global.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,7 +22,10 @@ class _SplashScreenState extends State<SplashScreen> {
       AppConstants.statusBarHeight = statusBarHeight;
       AppConstants.screenSize = size;
       Future.delayed(const Duration(milliseconds: 1500), () {
-        Navigator.of(context).pushReplacementNamed(Screens.home);
+        AppRouting().pushReplacementNamed(
+          context,
+          Screens.home.toName,
+        );
       });
     });
   }

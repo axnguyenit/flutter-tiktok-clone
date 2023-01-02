@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok/constants/constants.dart';
 
 abstract class BaseTheme {
   ColorScheme get colorScheme => const ColorScheme.light();
 
   AppBarTheme get appBarTheme => AppBarTheme(
         elevation: 0,
-        backgroundColor: colorScheme.primary,
+        centerTitle: true,
         surfaceTintColor: colorScheme.primary,
         toolbarTextStyle: TextStyle(
           fontFamily: fontFamily,
@@ -60,8 +61,8 @@ abstract class BaseTheme {
         labelMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
         labelSmall: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
       ).apply(
-        bodyColor: const Color(0xFF3A4A64),
-        displayColor: const Color(0xFF3A4A64),
+        bodyColor: AppColors.dark,
+        displayColor: AppColors.dark,
       ),
       applyElevationOverlayColor: isDark,
       useMaterial3: true,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok/constants/constants.dart';
+import 'package:tiktok/global/global.dart';
 import 'package:tiktok/widgets/widgets.dart';
 import 'package:shared/shared.dart';
 
@@ -32,7 +33,11 @@ class _SignInScreenState extends State<SignInScreen> {
                     ..error('error')
                     ..trace('trace')
                     ..warning('warning');
-                  Navigator.of(context).pushReplacementNamed(Screens.home);
+
+                  AppRouting().pushReplacementNamed(
+                    context,
+                    Screens.home.toName,
+                  );
                 },
               ),
             ],
