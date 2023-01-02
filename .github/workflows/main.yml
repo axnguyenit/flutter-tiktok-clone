@@ -34,7 +34,7 @@ jobs:
         with:
           channel: "stable"
       - run: flutter pub get
-      - run: flutter build apk --dart-define env=$(echo $(cat .env | tr '\n' '|')) --flavor prod --release
+      - run: flutter build apk -t lib/main.dart --flavor prod --dart-define FLAVOR=prod  
       - uses: actions/upload-artifact@v1
         with:
           name: release-apk
