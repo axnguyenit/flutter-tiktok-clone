@@ -6,3 +6,7 @@ abstract class AuthenticationEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class AuthenticationSignedInWithFacebook extends AuthenticationEvent {}
+
+class AuthenticationSignedInWithGoogle extends AuthenticationEvent {}

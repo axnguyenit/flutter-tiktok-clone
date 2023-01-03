@@ -45,6 +45,10 @@ jobs:
         env:
           ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
         run: echo "$ENVIRONMENT" > .env
+      - name: Decode strings.xml
+        env:
+          STRINGS: ${{ secrets.STRINGS }}
+        run: echo "$STRINGS" > android/app/src/main/res/values/strings.xml
 
       - uses: subosito/flutter-action@v2
         with:

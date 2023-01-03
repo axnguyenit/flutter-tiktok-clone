@@ -4,7 +4,7 @@ import 'package:tiktok/models/models.dart';
 import 'package:tiktok/widgets/widgets.dart';
 
 class ProfileInfo extends StatelessWidget {
-  final User? user;
+  final UserModel? user;
 
   const ProfileInfo({
     super.key,

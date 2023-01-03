@@ -27,21 +27,20 @@ class EventBus {
     _retryEvents = [];
   }
 
-  T newBlocWithConstructor<T extends BaseBloc>(Key key, Function constructor) {
+  T newBlocWithConstructor<T extends BaseBloc>(Key key, T constructor) {
     final found = _blocs.indexWhere((b) => b.key == key);
     if (found >= 0 && _blocs[found] is T) {
       return _blocs[found] as T;
     }
 
     try {
-      final T newInstance = constructor();
       log.trace('New Bloc is created with key = $key');
-      _blocs.add(newInstance);
-      if (newInstance.subscribes().isNotEmpty) {
-        _broadcasts.addAll(newInstance.subscribes());
+      _blocs.add(constructor);
+      if (constructor.subscribes().isNotEmpty) {
+        _broadcasts.addAll(constructor.subscribes());
       }
       _retryEvent<T>(key);
-      return newInstance;
+      return constructor;
     } catch (e) {
       log.error('Error in new instance of bloc $key: $e');
     }

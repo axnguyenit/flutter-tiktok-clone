@@ -1,6 +1,6 @@
 import 'entity.dart';
 
-class User extends Entity {
+class UserModel extends Entity {
   final String uid;
   final String email;
   final String phone;
@@ -8,7 +8,7 @@ class User extends Entity {
   final int follower;
   final int likes;
 
-  User({
+  UserModel({
     required this.uid,
     required this.email,
     required this.phone,
@@ -17,8 +17,8 @@ class User extends Entity {
     required this.likes,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
       uid: json['uid'] as String,
       email: json['email'] as String,
       phone: json['phone'] as String,
@@ -39,4 +39,7 @@ class User extends Entity {
       'likes': likes,
     };
   }
+
+  @override
+  List<Object> get props => [uid];
 }

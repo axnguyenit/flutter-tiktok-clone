@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared/shared.dart';
+import 'package:tiktok/blocs/blocs.dart';
 import 'package:tiktok/constants/constants.dart';
 import 'package:tiktok/widgets/widgets.dart';
 
@@ -31,7 +34,16 @@ class SignInOptions extends StatelessWidget {
               )
             ],
           ),
-          onPressed: () {},
+          onPressed: () {
+            EventBus().event<AuthenticationBloc>(
+              Keys.Bloc.authenticationBloc,
+              AuthenticationSignedInWithFacebook(),
+            );
+
+            // context
+            //     .read<AuthenticationBloc>()
+            //     .add(AuthenticationSignedInWithFacebook());
+          },
         ))
         ..add(SizedBox(
           height: i == length - 1 ? 0 : 12,

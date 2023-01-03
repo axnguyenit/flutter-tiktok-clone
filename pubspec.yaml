@@ -53,6 +53,8 @@ dependencies:
   flutter_bloc: ^8.1.1
   equatable: ^2.0.5
   flutter_svg: ^1.1.6
+  flutter_facebook_auth: ^5.0.7
+  google_sign_in: ^5.4.2
   # :video_compress
 
 dev_dependencies:

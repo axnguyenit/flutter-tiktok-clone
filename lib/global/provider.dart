@@ -1,8 +1,9 @@
 import 'package:tiktok/models/models.dart';
+import 'package:tiktok/services/services.dart';
 
 class Provider {
   static final Provider _singleton = Provider._internal();
-  User? signedInUser;
+  UserModel? signedInUser;
 
   factory Provider() => _singleton;
 
@@ -13,4 +14,6 @@ class Provider {
   bool isInitialized = false;
 
   // *********** SERVICES *********** //
+  AuthenticationService get authenticationService =>
+      AuthenticationServiceImpl();
 }
