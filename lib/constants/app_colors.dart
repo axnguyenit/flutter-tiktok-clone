@@ -20,6 +20,7 @@ class AppColors {
 
   static const Color placeholder = Color(0XFFC4C4CA);
   static const Color foregroundSubdued = Color(0XFF91919D);
+  static const Color icon = Color(0xFF8992A2);
 
   // *********** STATE *********** //
   static const Color danger = Color(0XFFDC2626);

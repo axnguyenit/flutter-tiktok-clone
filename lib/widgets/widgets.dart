@@ -1,3 +1,4 @@
+export 'app_icon/app_icon.dart';
 export 'avatar/x_avatar.dart';
 export 'bottom_drawer/bottom_drawer.dart';
 export 'button/x_button.dart';

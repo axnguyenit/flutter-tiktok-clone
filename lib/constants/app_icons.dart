@@ -2,33 +2,22 @@
 
 enum AppIcons {
   appIcon,
-  arrow,
-  menu,
-  flower,
-  heart,
-  user,
-  search,
-  arrowLeft,
-  more,
-  sun,
-  temperature,
-  humidity,
-  wind
+  facebook,
+  google,
+  instagram,
+  kakaotalk,
+  line,
+  twitter,
 }
 
 const _AppIconsAsset = {
   AppIcons.appIcon: '',
-  AppIcons.menu: 'assets/icons/menu.svg',
-  AppIcons.flower: 'assets/icons/flower.svg',
-  AppIcons.heart: 'assets/icons/heart.svg',
-  AppIcons.user: 'assets/icons/user.svg',
-  AppIcons.search: 'assets/icons/search.svg',
-  AppIcons.arrowLeft: 'assets/icons/arrow-left.svg',
-  AppIcons.more: 'assets/icons/more.svg',
-  AppIcons.sun: 'assets/icons/sun.svg',
-  AppIcons.temperature: 'assets/icons/temperature.svg',
-  AppIcons.humidity: 'assets/icons/humidity.svg',
-  AppIcons.wind: 'assets/icons/wind.svg',
+  AppIcons.facebook: 'assets/icons/facebook.svg',
+  AppIcons.google: 'assets/icons/google.svg',
+  AppIcons.instagram: 'assets/icons/instagram.svg',
+  AppIcons.kakaotalk: 'assets/icons/kakaotalk.svg',
+  AppIcons.line: 'assets/icons/line.svg',
+  AppIcons.twitter: 'assets/icons/twitter.svg',
 };
 
 extension AppIconsExtension on AppIcons {
@@ -37,6 +26,6 @@ extension AppIconsExtension on AppIcons {
     if (assets != null) {
       return assets;
     }
-    return 'assets/icons/placeholder.svg';
+    return 'assets/icons/error.svg';
   }
 }

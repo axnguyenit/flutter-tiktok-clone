@@ -15,8 +15,6 @@ class BaseBottomDrawer {
     return showModalBottomSheet<T>(
       context: context,
       backgroundColor: Colors.transparent,
-      enableDrag: false,
-      isDismissible: true,
       isScrollControlled: true,
       builder: (context) {
         return SafeArea(

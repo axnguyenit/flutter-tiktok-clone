@@ -18,6 +18,7 @@ class XButton extends StatelessWidget {
   final double? letterSpacing;
   final BorderRadius? borderRadius;
   final GestureTapCallback? onPressed;
+  final Color? borderColor;
 
   const XButton({
     Key? key,
@@ -30,6 +31,7 @@ class XButton extends StatelessWidget {
     this.onPressed,
     this.prefixIcon,
     this.suffixIcon,
+    this.borderColor,
     this.borderRadius,
     this.letterSpacing,
     this.elevation = 0,
@@ -48,6 +50,7 @@ class XButton extends StatelessWidget {
     this.onPressed,
     this.prefixIcon,
     this.suffixIcon,
+    this.borderColor,
     this.borderRadius,
     this.letterSpacing,
     this.elevation = 0,
@@ -66,6 +69,7 @@ class XButton extends StatelessWidget {
     this.onPressed,
     this.prefixIcon,
     this.suffixIcon,
+    this.borderColor,
     this.borderRadius,
     this.letterSpacing,
     this.elevation = 0,
@@ -84,6 +88,7 @@ class XButton extends StatelessWidget {
     this.onPressed,
     this.prefixIcon,
     this.suffixIcon,
+    this.borderColor,
     this.borderRadius,
     this.letterSpacing,
     this.elevation = 0,
@@ -102,6 +107,7 @@ class XButton extends StatelessWidget {
     this.onPressed,
     this.prefixIcon,
     this.suffixIcon,
+    this.borderColor,
     this.borderRadius,
     this.letterSpacing,
     this.elevation = 0,
@@ -113,9 +119,9 @@ class XButton extends StatelessWidget {
     switch (style) {
       case XButtonStyle.contained:
       case XButtonStyle.outlined:
-        return color ?? context.primaryColor;
+        return borderColor ?? context.primaryColor;
       case XButtonStyle.text:
-        return context.lightColor;
+        return borderColor ?? context.lightColor;
     }
   }
 
@@ -152,7 +158,7 @@ class XButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final xBorderRadius = borderRadius ?? BorderRadius.circular(8);
+    final xBorderRadius = borderRadius ?? BorderRadius.circular(2);
     final textColor = _getTextColor(context);
     final backgroundColor = _getBackgroundColor(context);
     final isEnabled = onPressed != null;
@@ -173,7 +179,7 @@ class XButton extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: xBorderRadius,
             border: isEnabled
-                ? Border.all(color: _getBorderColor(context), width: 2.0)
+                ? Border.all(color: _getBorderColor(context), width: 1.0)
                 : Border.all(
                     color: isEnabled
                         ? _getBorderColor(context)

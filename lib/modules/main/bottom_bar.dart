@@ -3,7 +3,7 @@ import 'package:tiktok/modules/home/home_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:tiktok/modules/inbox/inbox_screen.dart';
-import 'package:tiktok/modules/profile/profile_screen.dart';
+import 'package:tiktok/modules/profile/unauthenticated_profile_screen.dart';
 import 'package:tiktok/modules/shop/shop_screen.dart';
 
 enum BottomBar { home, shop, inbox, profile }
@@ -32,7 +32,7 @@ extension BottomBarExtension on BottomBar {
       case BottomBar.inbox:
         return const InboxScreen();
       case BottomBar.profile:
-        return const ProfileScreen();
+        return const UnauthenticatedProfileScreen();
     }
   }
 

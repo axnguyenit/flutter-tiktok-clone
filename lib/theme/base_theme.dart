@@ -7,7 +7,8 @@ abstract class BaseTheme {
   AppBarTheme get appBarTheme => AppBarTheme(
         elevation: 0,
         centerTitle: true,
-        surfaceTintColor: colorScheme.primary,
+        backgroundColor: AppColors.light,
+        surfaceTintColor: AppColors.light,
         toolbarTextStyle: TextStyle(
           fontFamily: fontFamily,
           fontSize: 18,
@@ -15,7 +16,7 @@ abstract class BaseTheme {
         ),
       );
 
-  String get fontFamily => 'Gilroy';
+  String get fontFamily => 'Roboto';
 
   ThemeData build(BuildContext context) {
     final bool isDark = colorScheme.brightness == Brightness.dark;

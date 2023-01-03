@@ -94,4 +94,6 @@ extension AppContext on BuildContext {
   Color get warningSubduedColor => AppColors.warningSubdued;
 
   Color get warningHoverColor => AppColors.warningHover;
+
+  Color get iconColor => AppColors.icon;
 }

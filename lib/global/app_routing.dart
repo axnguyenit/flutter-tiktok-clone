@@ -40,7 +40,7 @@ class AppRouting {
     GoRouter.of(context).pushReplacementNamed(name);
   }
 
-  void pop<T extends Object>(BuildContext context, T result) {
+  void pop<T extends Object>(BuildContext context, [T? result]) {
     GoRouter.of(context).pop<T>(result);
   }
 }

@@ -1,8 +1,24 @@
 {
-  "button.home": "Trang chủ",
-  "button.signIn": "Đăng nhập",
+  "button.home": "Home",
+  "button.signIn": "Sign In",
   "bottom_bar.home": "Home",
   "bottom_bar.shop": "Shop",
   "bottom_bar.inbox": "Inbox",
-  "bottom_bar.profile": "Profile"
+  "bottom_bar.profile": "Profile",
+  "app.policy_and_terms": "By continuing you agree to our [[Terms of Service]] and acknowledge that you have read our [[Privacy Policy]] to learn how we collect, use, and share your data.",
+  "app.sign_in_or_sign_up": "Sign in or Sign up",
+  "authentication.use_phone_or_email": "Use phone or email",
+  "authentication.facebook": "Continue with Facebook",
+  "authentication.google": "Continue with Google",
+  "authentication.twitter": "Continue with Twitter",
+  "authentication.line": "Continue with LINE",
+  "authentication.kakaoTalk": "Continue with KakaoTalk",
+  "authentication.phone_or_email_or_username": "User phone / email / username",
+  "authentication.instagram": "Continue with Instagram",
+  "authentication.sign_up_slogan": "Create a profile, follow other accounts, make your own videos, and more.",
+  "authentication.sign_in_slogan": "Manage your account, check notifications, comment on videos, and more.",
+  "authentication.sign_up_title": "Sign up for TikTok",
+  "authentication.sign_in_title": "Sign in to TikTok",
+  "authentication.go_to_sign_in": "Already have an account? [[Sign in]]",
+  "authentication.go_to_sign_up": "Don't have an account? [[Sign up]]"
 }

@@ -12,10 +12,12 @@ class BottomDrawer {
 
   BaseBottomDrawer standard({
     required Widget child,
+    EdgeInsets? padding,
   }) {
     return BaseBottomDrawer(
       context: context,
       child: child,
+      padding: padding,
     );
   }
 }
