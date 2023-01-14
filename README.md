@@ -86,6 +86,15 @@ factory AuthenticationBloc.instance() {
 
 ```
 ┌──────────────────────────────────┬────────────────────────────────────────────────────────────────────┐
+├─ android                         │                                                                    │
+│  └─ app                          │                                                                    │
+│     └─ src                       │                                                                    │
+│        ├─ debug                  │                                                                    │
+│        ├─ main                   │                                                                    │
+│        │  └─ res                 │                                                                    │
+│        │     └─ values           │                                                                    │
+│        │        └─ strings.xml   │                                                                    │
+│        └─ profile                │                                                                    │
 ├─ environments                    │  Setup all configs that based on the environment, using .env file  │
 │  ├─ dev                          │  Development environment                                           │
 │  │  ├─ .env                      │                                                                    │

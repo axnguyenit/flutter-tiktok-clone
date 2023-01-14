@@ -7,4 +7,6 @@ class AppConstants {
   static double statusBarHeight = 0.0;
 
   static Size screenSize = const Size(0.0, 0.0);
+
+  static const FailureFilePath = 'failure_file_path';
 }

@@ -1,22 +1,37 @@
+import 'package:flutter/material.dart';
 import 'package:tiktok/constants/constants.dart';
 import 'package:tiktok/modules/home/home_screen.dart';
-
-import 'package:flutter/material.dart';
 import 'package:tiktok/modules/inbox/inbox_screen.dart';
 import 'package:tiktok/modules/profile/unauthenticated_profile_screen.dart';
 import 'package:tiktok/modules/shop/shop_screen.dart';
 
 enum BottomBar { home, shop, inbox, profile }
 
-typedef OnNavigateToTab = void Function(BottomBar tab,
-    {Map<String, dynamic> params});
+typedef OnNavigateToTab = void Function(
+  BottomBar tab, {
+  Map<String, dynamic> params,
+});
 
-List<BottomBar> get allBottomBarItems => [
-      BottomBar.home,
-      BottomBar.shop,
-      BottomBar.inbox,
-      BottomBar.profile,
-    ];
+enum BottomBarPosition {
+  left,
+  right;
+
+  List<BottomBar> get bottomBarItems {
+    switch (this) {
+      case BottomBarPosition.left:
+        return [
+          BottomBar.home,
+          BottomBar.shop,
+        ];
+
+      case BottomBarPosition.right:
+        return [
+          BottomBar.inbox,
+          BottomBar.profile,
+        ];
+    }
+  }
+}
 
 BottomBar bottomBarFromIndex(int index) {
   return BottomBar.values[index];

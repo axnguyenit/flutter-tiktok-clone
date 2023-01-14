@@ -40,33 +40,33 @@ class LogImpl implements Log {
   LogImpl._internal();
 
   @override
-  void debug(dynamic message) {
-    _log(message);
+  void debug(String message, {List<String> messages = const []}) {
+    _log(message, messages);
   }
 
   @override
-  void info(dynamic message) {
-    _log(message, 12);
+  void info(String message, {List<String> messages = const []}) {
+    _log(message, messages, 12);
   }
 
   @override
-  void trace(dynamic message) {
-    _log(message, (232 + (0.5.clamp(0.0, 1.0) * 23).round()));
+  void trace(String message, {List<String> messages = const []}) {
+    _log(message, messages, (232 + (0.5.clamp(0.0, 1.0) * 23).round()));
   }
 
   @override
-  void warning(dynamic message) {
-    _log(message, 208);
+  void warning(String message, {List<String> messages = const []}) {
+    _log(message, messages, 208);
   }
 
   @override
-  void error(dynamic message) {
-    _log(message, 196);
+  void error(String message, {List<String> messages = const []}) {
+    _log(message, messages, 196);
   }
 
   @override
-  void fatal(dynamic message) {
-    _log(message, 199);
+  void fatal(String message, {List<String> messages = const []}) {
+    _log(message, messages, 199);
   }
 
   bool _discardDeviceStacktraceLine(String line) {
@@ -83,7 +83,11 @@ class LogImpl implements Log {
     return match.group(1)!.startsWith('LogImpl'); // current class name
   }
 
-  void _log(dynamic message, [int? fg]) {
+  void _log(
+    String message, [
+    List<String> messages = const [],
+    int? fg,
+  ]) {
     final doubleDividerLine = StringBuffer();
     final singleDividerLine = StringBuffer();
 
@@ -121,6 +125,9 @@ class LogImpl implements Log {
 
     debugPrint(_wrapColorMessage(middleBorder, fg));
     debugPrint(_wrapColorMessage('$verticalLine $message', fg));
+    for (var message in messages) {
+      debugPrint(_wrapColorMessage('$verticalLine $message', fg));
+    }
     debugPrint(_wrapColorMessage(bottomBorder, fg));
   }
 

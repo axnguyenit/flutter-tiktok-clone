@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
                     Screens.signIn.toName,
                   );
                 },
-              )
+              ),
             ],
           ),
         ),

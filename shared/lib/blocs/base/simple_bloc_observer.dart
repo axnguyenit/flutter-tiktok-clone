@@ -5,7 +5,11 @@ class SimpleBlocObserver extends BlocObserver {
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    log.trace(transition);
+    log.trace('TRANSITION: ', messages: [
+      '- Current State >>>> ${transition.currentState}',
+      '- Event >>>> ${transition.event}',
+      '- Next State >>>> ${transition.nextState}'
+    ]);
   }
 
   @override

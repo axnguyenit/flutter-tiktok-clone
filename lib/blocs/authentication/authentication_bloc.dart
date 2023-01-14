@@ -21,7 +21,7 @@ class AuthenticationBloc
   }
 
   factory AuthenticationBloc.instance() {
-    final key = Keys.Bloc.authenticationBloc;
+    final key = Keys.Blocs.authenticationBloc;
 
     return EventBus().newBlocWithConstructor<AuthenticationBloc>(
       key,
@@ -38,6 +38,13 @@ class AuthenticationBloc
   ) async {
     try {
       await _authenticationService.signInWithFacebook();
+      final user = await _authenticationService.getCurrentUser();
+      log.info('*********** FACEBOOK SIGNED IN ***********');
+
+      EventBus().broadcast(
+        Keys.Broadcast.signInSuccess,
+        params: {'user': user, 'justSignUp': false},
+      );
     } catch (e) {
       log.error('*********** SIGN IN WITH FACEBOOK ERROR >>>> $e ***********');
     }
@@ -49,6 +56,14 @@ class AuthenticationBloc
   ) async {
     try {
       await _authenticationService.signInWithGoogle();
+      final user = await _authenticationService.getCurrentUser();
+
+      log.info('*********** GOOGLE SIGNED IN ***********');
+
+      EventBus().broadcast(
+        Keys.Broadcast.signInSuccess,
+        params: {'user': user, 'justSignUp': false},
+      );
     } catch (e) {
       log.error('*********** SIGN IN WITH GOOGLE ERROR >>>> $e ***********');
     }

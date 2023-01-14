@@ -20,5 +20,6 @@
   "authentication.sign_up_title": "Sign up for TikTok",
   "authentication.sign_in_title": "Sign in to TikTok",
   "authentication.go_to_sign_in": "Already have an account? [[Sign in]]",
-  "authentication.go_to_sign_up": "Don't have an account? [[Sign up]]"
+  "authentication.go_to_sign_up": "Don't have an account? [[Sign up]]",
+  "video_creation.add_sound": "Add Sound"
 }

@@ -4,9 +4,11 @@ class UserModel extends Entity {
   final String uid;
   final String email;
   final String phone;
-  final int following;
-  final int follower;
+  final List<String> following;
+  final List<String> follower;
   final int likes;
+  final String avatar;
+  final String fullName;
 
   UserModel({
     required this.uid,
@@ -15,6 +17,8 @@ class UserModel extends Entity {
     required this.following,
     required this.follower,
     required this.likes,
+    required this.avatar,
+    required this.fullName,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -22,9 +26,13 @@ class UserModel extends Entity {
       uid: json['uid'] as String,
       email: json['email'] as String,
       phone: json['phone'] as String,
-      following: json['following'] as int,
-      follower: json['follower'] as int,
+      following:
+          List<String>.from(json['following'].map((e) => e as String)).toList(),
+      follower:
+          List<String>.from(json['follower'].map((e) => e as String)).toList(),
       likes: json['likes'] as int,
+      avatar: json['avatar'] as String,
+      fullName: json['fullName'] as String,
     );
   }
 
@@ -37,6 +45,8 @@ class UserModel extends Entity {
       'following': following,
       'follower': follower,
       'likes': likes,
+      'avatar': avatar,
+      'fullName': fullName,
     };
   }
 

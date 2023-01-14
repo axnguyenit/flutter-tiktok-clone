@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared/shared.dart';
 import 'package:tiktok/blocs/blocs.dart';
 import 'package:tiktok/constants/constants.dart';
@@ -7,19 +6,24 @@ import 'package:tiktok/widgets/widgets.dart';
 
 import 'authentication_options.dart';
 
-class SignInOptions extends StatelessWidget {
-  const SignInOptions({super.key});
+class SignUpOptions extends StatelessWidget {
+  const SignUpOptions({super.key});
 
-  List<Widget> _buildSignInOptions(BuildContext context) {
-    final signInOptions = <Widget>[];
-    final length = AuthenticationType.signIn.authenticationOptions.length;
+  List<Widget> _buildSignUpOptions(BuildContext context) {
+    final signUpOptions = <Widget>[];
+    final length = AuthenticationType.signUp.authenticationOptions.length;
 
     for (int i = 0; i < length; i++) {
-      final authOption = AuthenticationType.signIn.authenticationOptions[i];
-      signInOptions
-        ..add(XButton.outlined(
+      final authOption = AuthenticationType.signUp.authenticationOptions[i];
+      signUpOptions
+        ..add(XButton(
           height: 44,
-          borderColor: context.borderColor.withOpacity(.5),
+          style: authOption == AuthenticationOptions.phoneOrEmail
+              ? XButtonStyle.contained
+              : XButtonStyle.outlined,
+          borderColor: authOption == AuthenticationOptions.phoneOrEmail
+              ? null
+              : context.borderColor.withOpacity(.5),
           child: Stack(
             children: [
               Align(
@@ -30,19 +34,18 @@ class SignInOptions extends StatelessWidget {
                 alignment: Alignment.center,
                 child: XText(
                   context.translate(authOption.toTitle),
+                  style: authOption != AuthenticationOptions.phoneOrEmail
+                      ? null
+                      : context.bodyMedium?.copyWith(color: context.lightColor),
                 ),
               )
             ],
           ),
           onPressed: () {
             EventBus().event<AuthenticationBloc>(
-              Keys.Bloc.authenticationBloc,
-              AuthenticationSignedInWithFacebook(),
+              Keys.Blocs.authenticationBloc,
+              AuthenticationSignedInWithGoogle(),
             );
-
-            // context
-            //     .read<AuthenticationBloc>()
-            //     .add(AuthenticationSignedInWithFacebook());
           },
         ))
         ..add(SizedBox(
@@ -50,7 +53,7 @@ class SignInOptions extends StatelessWidget {
         ));
     }
 
-    return signInOptions;
+    return signUpOptions;
   }
 
   @override
@@ -63,20 +66,20 @@ class SignInOptions extends StatelessWidget {
             height: 48,
           ),
           XText.headlineMedium(context.translate(
-            Strings.Authentication.signInTitle,
+            Strings.Authentication.signUpTitle,
           )),
           const SizedBox(
             height: 12,
           ),
           XText.bodySmall(
-            context.translate(Strings.Authentication.signInSlogan),
+            context.translate(Strings.Authentication.signUpSlogan),
             textAlign: TextAlign.center,
             style: context.bodySmall?.copyWith(color: context.borderHoverColor),
           ),
           const SizedBox(
             height: 32,
           ),
-          ..._buildSignInOptions(context),
+          ..._buildSignUpOptions(context),
         ],
       ),
     );

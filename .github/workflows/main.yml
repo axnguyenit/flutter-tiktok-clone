@@ -23,6 +23,7 @@ env:
   # GOOGLE_SERVICE_INFO
   # ENVIRONMENT
   # ANDROID_APP_ID
+  # STRINGS
 
 jobs:
   build-android:

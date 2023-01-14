@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tiktok/models/models.dart';
 import 'package:shared/shared.dart';
+// ignore: depend_on_referenced_packages
 import 'package:sprintf/sprintf.dart';
 
 class SLocalizationsDelegate extends LocalizationsDelegate<S> {

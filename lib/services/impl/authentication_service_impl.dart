@@ -1,5 +1,6 @@
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared/shared.dart';
 import 'package:tiktok/services/services.dart';
 
 import 'dart:async';
@@ -89,11 +90,32 @@ class AuthenticationServiceImpl implements AuthenticationService {
       loginResult.accessToken!.token,
     );
 
+    log.info(
+        'facebookAuthCredential >>>> ${facebookAuthCredential.toString()}');
+
     final userCredential = await _auth.signInWithCredential(
       facebookAuthCredential,
     );
 
+    log.info('userCredential >>>> ${userCredential.toString()}');
+
     final token = userCredential.user!.getIdToken();
+
+    if (userCredential.additionalUserInfo?.isNewUser ?? false) {
+      await createNewUser(
+        user: UserModel(
+          uid: _auth.currentUser!.uid,
+          email: userCredential.user!.email!,
+          fullName: userCredential.user!.displayName!,
+          phone: '',
+          following: const [],
+          follower: const [],
+          likes: 0,
+          avatar: userCredential.additionalUserInfo?.profile?['picture']['data']
+              ['url'],
+        ),
+      );
+    }
 
     return token;
   }
@@ -110,11 +132,30 @@ class AuthenticationServiceImpl implements AuthenticationService {
       idToken: googleAuth?.idToken,
     );
 
+    log.info('googleAuthCredential >>>> ${googleAuthCredential.toString()}');
+
     final userCredential = await _auth.signInWithCredential(
       googleAuthCredential,
     );
 
+    log.info('userCredential >>>> ${userCredential.toString()}');
+
     final token = userCredential.user!.getIdToken();
+
+    if (userCredential.additionalUserInfo?.isNewUser ?? false) {
+      await createNewUser(
+        user: UserModel(
+          uid: _auth.currentUser!.uid,
+          email: userCredential.user!.email!,
+          fullName: userCredential.user!.displayName!,
+          phone: '',
+          following: const [],
+          follower: const [],
+          likes: 0,
+          avatar: userCredential.additionalUserInfo?.profile?['picture'],
+        ),
+      );
+    }
 
     return token;
   }
@@ -150,8 +191,13 @@ class AuthenticationServiceImpl implements AuthenticationService {
   }
 
   @override
-  Future<User?> getCurrentUser() async {
-    return _auth.currentUser;
+  Future<UserModel> getCurrentUser() async {
+    final docRef =
+        _firestore.collection(Collections.users).doc(_auth.currentUser!.uid);
+    final snapshot = await docRef.get();
+    final json = snapshot.data();
+
+    return UserModel.fromJson(json!);
   }
 
   @override
@@ -167,7 +213,7 @@ class AuthenticationServiceImpl implements AuthenticationService {
   }
 
   @override
-  Future<bool> authenticated() async {
+  Future<bool> isAuthenticated() async {
     return _auth.currentUser != null;
   }
 

@@ -8,6 +8,8 @@ class Strings {
   static _App get App => _App();
 
   static _Authentication get Authentication => _Authentication();
+
+  static _VideoCreation get VideoCreation => _VideoCreation();
 }
 
 class _Button {
@@ -43,4 +45,8 @@ class _Authentication {
 class _App {
   final String policyAndTerms = 'app.policy_and_terms';
   final String signInOrSignUp = 'app.sign_in_or_sign_up';
+}
+
+class _VideoCreation {
+  final String addSound = 'video_creation.add_sound';
 }

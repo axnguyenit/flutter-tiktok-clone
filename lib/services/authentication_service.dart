@@ -1,5 +1,4 @@
 import 'package:tiktok/models/models.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthenticationService {
   Future<SMSVerification> signInWithPhone({required String phoneNumber});
@@ -21,9 +20,9 @@ abstract class AuthenticationService {
 
   Future<String?> getCurrentSession();
 
-  Future<User?> getCurrentUser();
+  Future<UserModel> getCurrentUser();
 
   Future<void> signOut();
 
-  Future<bool> authenticated();
+  Future<bool> isAuthenticated();
 }

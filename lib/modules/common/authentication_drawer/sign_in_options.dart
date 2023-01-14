@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared/shared.dart';
+import 'package:tiktok/blocs/blocs.dart';
 import 'package:tiktok/constants/constants.dart';
 import 'package:tiktok/widgets/widgets.dart';
 
 import 'authentication_options.dart';
 
-class SignUpOptions extends StatelessWidget {
-  const SignUpOptions({super.key});
+class SignInOptions extends StatelessWidget {
+  const SignInOptions({super.key});
 
-  List<Widget> _buildSignUpOptions(BuildContext context) {
-    final signUpOptions = <Widget>[];
-    final length = AuthenticationType.signUp.authenticationOptions.length;
+  List<Widget> _buildSignInOptions(BuildContext context) {
+    final signInOptions = <Widget>[];
+    final length = AuthenticationType.signIn.authenticationOptions.length;
 
     for (int i = 0; i < length; i++) {
-      final authOption = AuthenticationType.signUp.authenticationOptions[i];
-      signUpOptions
-        ..add(XButton(
+      final authOption = AuthenticationType.signIn.authenticationOptions[i];
+      signInOptions
+        ..add(XButton.outlined(
           height: 44,
-          style: authOption == AuthenticationOptions.phoneOrEmail
-              ? XButtonStyle.contained
-              : XButtonStyle.outlined,
-          borderColor: authOption == AuthenticationOptions.phoneOrEmail
-              ? null
-              : context.borderColor.withOpacity(.5),
+          borderColor: context.borderColor.withOpacity(.5),
           child: Stack(
             children: [
               Align(
@@ -32,21 +30,23 @@ class SignUpOptions extends StatelessWidget {
                 alignment: Alignment.center,
                 child: XText(
                   context.translate(authOption.toTitle),
-                  style: authOption != AuthenticationOptions.phoneOrEmail
-                      ? null
-                      : context.bodyMedium?.copyWith(color: context.lightColor),
                 ),
               )
             ],
           ),
-          onPressed: () {},
+          onPressed: () {
+            EventBus().event<AuthenticationBloc>(
+              Keys.Blocs.authenticationBloc,
+              AuthenticationSignedInWithFacebook(),
+            );
+          },
         ))
         ..add(SizedBox(
           height: i == length - 1 ? 0 : 12,
         ));
     }
 
-    return signUpOptions;
+    return signInOptions;
   }
 
   @override
@@ -59,20 +59,20 @@ class SignUpOptions extends StatelessWidget {
             height: 48,
           ),
           XText.headlineMedium(context.translate(
-            Strings.Authentication.signUpTitle,
+            Strings.Authentication.signInTitle,
           )),
           const SizedBox(
             height: 12,
           ),
           XText.bodySmall(
-            context.translate(Strings.Authentication.signUpSlogan),
+            context.translate(Strings.Authentication.signInSlogan),
             textAlign: TextAlign.center,
             style: context.bodySmall?.copyWith(color: context.borderHoverColor),
           ),
           const SizedBox(
             height: 32,
           ),
-          ..._buildSignUpOptions(context),
+          ..._buildSignInOptions(context),
         ],
       ),
     );

@@ -16,4 +16,6 @@ class Provider {
   // *********** SERVICES *********** //
   AuthenticationService get authenticationService =>
       AuthenticationServiceImpl();
+
+  StorageService get storageService => StorageServiceImpl();
 }

@@ -5,11 +5,11 @@ import 'package:go_router/go_router.dart';
 import 'package:shared/shared.dart';
 import 'package:tiktok/blocs/blocs.dart';
 import 'package:tiktok/constants/constants.dart';
-import 'package:tiktok/modules/authentication/sign_in/sign_in_screen.dart';
-import 'package:tiktok/modules/main/main_screen.dart';
-import 'package:tiktok/modules/splash/splash_screen.dart';
 
 import 'error/error_screen.dart';
+import 'main/main_screen.dart';
+import 'splash/splash_screen.dart';
+import 'video_creation/video_creation_screen.dart';
 
 class AppRouter {
   static final _singleton = AppRouter._internal();
@@ -33,22 +33,22 @@ class AppRouter {
           builder: (context, state) => const SplashScreen(),
         ),
         GoRoute(
-          path: '/${Screens.signIn.toPath}',
-          name: Screens.signIn.toName,
-          builder: (context, state) => const SignInScreen(),
-        ),
-        GoRoute(
           path: Screens.home.toPath,
           name: Screens.home.toName,
-          builder: (_, __) => BlocProvider(
+          builder: (context, state) => BlocProvider<AuthenticationBloc>(
             lazy: false,
-            create: (_) => AuthenticationBloc.instance(),
+            create: (context) => AuthenticationBloc.instance(),
             child: const MainScreen(),
           ),
         ),
+        GoRoute(
+          path: '/${Screens.videoCreation.toPath}',
+          name: Screens.videoCreation.toName,
+          builder: (context, state) => const VideoCreationScreen(),
+        ),
       ],
       errorBuilder: (_, state) {
-        log.error(state.error);
+        log.error(state.error.toString());
         // error: state.error.toString(),
         return const ErrorScreen();
       },

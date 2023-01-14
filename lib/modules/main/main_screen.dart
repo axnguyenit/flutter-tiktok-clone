@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tiktok/blocs/blocs.dart';
+import 'package:tiktok/blocs/mixins/mixins.dart';
 import 'package:tiktok/constants/constants.dart';
+import 'package:tiktok/global/global.dart';
+import 'package:tiktok/modules/common/authentication_drawer/authentication_drawer.dart';
+import 'package:tiktok/modules/video_creation/video_creation_screen.dart';
+import 'package:tiktok/widgets/widgets.dart';
 
 import 'bottom_bar.dart';
+import 'video_creation_icon.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -10,7 +18,8 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
+class _MainScreenState extends State<MainScreen>
+    with WidgetsBindingObserver, SessionData {
   int _currentIndex = 0;
   bool _isHome = true;
   late List<Widget> _tabScreens;
@@ -19,14 +28,21 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   void initState() {
     super.initState();
 
-    _tabScreens = allBottomBarItems
-        .map((e) => e.toScreen(
-              onNavigateToTab: (
-                BottomBar tab, {
-                Map<String, dynamic> params = const {},
-              }) {},
-            ))
-        .toList();
+    _tabScreens = [
+      ...BottomBarPosition.left.bottomBarItems.map((e) => e.toScreen(
+            onNavigateToTab: (
+              BottomBar tab, {
+              Map<String, dynamic> params = const {},
+            }) {},
+          )),
+      const VideoCreationScreen(),
+      ...BottomBarPosition.right.bottomBarItems.map((e) => e.toScreen(
+            onNavigateToTab: (
+              BottomBar tab, {
+              Map<String, dynamic> params = const {},
+            }) {},
+          )),
+    ];
 
     WidgetsBinding.instance.addObserver(this);
   }
@@ -35,9 +51,13 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
     return SizedBox(
       width: double.infinity,
       height: double.infinity,
-      child: IndexedStack(
-        index: _currentIndex,
-        children: _tabScreens,
+      child: BlocBuilder<SessionBloc, SessionState>(
+        builder: (context, state) {
+          return IndexedStack(
+            index: _currentIndex,
+            children: _tabScreens,
+          );
+        },
       ),
     );
   }
@@ -63,9 +83,16 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
           ),
           child: BottomNavigationBar(
             elevation: 0,
-            items: allBottomBarItems
-                .map((e) => e.toNavigationBarItem(context, _isHome))
-                .toList(),
+            items: [
+              ...BottomBarPosition.left.bottomBarItems
+                  .map((e) => e.toNavigationBarItem(context, _isHome)),
+              const BottomNavigationBarItem(
+                icon: VideoCreationIcon(),
+                label: '',
+              ),
+              ...BottomBarPosition.right.bottomBarItems
+                  .map((e) => e.toNavigationBarItem(context, _isHome))
+            ],
             currentIndex: _currentIndex,
             backgroundColor: _isHome ? context.darkColor : context.lightColor,
             unselectedItemColor:
@@ -76,11 +103,24 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
             selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
             type: BottomNavigationBarType.fixed,
             showUnselectedLabels: true,
-            onTap: (index) {
-              setState(() {
-                _currentIndex = index;
-                _isHome = index == 0;
-              });
+            onTap: (index) async {
+              if (_tabScreens[index] is VideoCreationScreen) {
+                if (currentUser != null) {
+                  AppRouting().pushNamed(context, Screens.videoCreation.toName);
+                } else {
+                  await BottomDrawer.of(context)
+                      .standard(
+                        padding: const EdgeInsets.all(0),
+                        child: const AuthenticationDrawer(),
+                      )
+                      .show();
+                }
+              } else {
+                setState(() {
+                  _currentIndex = index;
+                  _isHome = index == 0;
+                });
+              }
             },
           ),
         ),

@@ -2,7 +2,8 @@ enum Screens {
   home,
   signIn,
   splash,
-  error;
+  error,
+  videoCreation;
 
   String get toName {
     switch (this) {
@@ -14,6 +15,8 @@ enum Screens {
         return 'SignIn';
       case Screens.error:
         return 'Error';
+      case Screens.videoCreation:
+        return 'VideoCreation';
     }
   }
 
@@ -27,6 +30,8 @@ enum Screens {
         return 'sign-in';
       case Screens.error:
         return 'error';
+      case Screens.videoCreation:
+        return 'video-creation';
     }
   }
 }
