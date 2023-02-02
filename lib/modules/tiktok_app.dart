@@ -1,3 +1,5 @@
+import 'package:common/common.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -16,11 +18,20 @@ class TikTokApp extends StatefulWidget {
 
 class TikTokAppState extends State<TikTokApp> {
   late final GoRouter _router;
+  final _messaging = Messaging(
+    firebaseMessaging: FirebaseMessaging.instance,
+  );
+
   @override
   void initState() {
     super.initState();
 
     _router = AppRouter().initRouter();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      log.info(
+          '*********** ${await FirebaseMessaging.instance.getToken()} ***********');
+    });
   }
 
   @override

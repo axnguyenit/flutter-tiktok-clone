@@ -1,15 +1,15 @@
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shared/shared.dart';
-import 'package:tiktok/services/services.dart';
-
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:tiktok/constants/constants.dart';
-import 'package:tiktok/models/models.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/common.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:tiktok/constants/constants.dart';
+import 'package:tiktok/enums/enums.dart';
+import 'package:tiktok/models/models.dart';
+import 'package:tiktok/services/services.dart';
 
 class AuthenticationServiceImpl implements AuthenticationService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -113,6 +113,8 @@ class AuthenticationServiceImpl implements AuthenticationService {
           likes: 0,
           avatar: userCredential.additionalUserInfo?.profile?['picture']['data']
               ['url'],
+          provider: AuthProvider.facebook,
+          deviceTokens: const [],
         ),
       );
     }
@@ -153,6 +155,8 @@ class AuthenticationServiceImpl implements AuthenticationService {
           follower: const [],
           likes: 0,
           avatar: userCredential.additionalUserInfo?.profile?['picture'],
+          provider: AuthProvider.google,
+          deviceTokens: const [],
         ),
       );
     }

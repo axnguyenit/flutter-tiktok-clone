@@ -17,7 +17,7 @@ class LogImpl implements Log {
 
   /// Matches a stacktrace line as generated on Android/iOS devices.
   /// For example:
-  /// #0      LogImpl._log (package:shared/log/log_impl.dart:86:37)
+  /// #0      LogImpl._log (package:common/log/log_impl.dart:86:37)
   static final _deviceStackTraceRegex =
       RegExp(r'#[0-9]+[\s]+(.+) \(([^\s]+)\)');
 
@@ -71,7 +71,7 @@ class LogImpl implements Log {
 
   bool _discardDeviceStacktraceLine(String line) {
     // current file path
-    if (line.startsWith('packages/shared/log/log_impl')) {
+    if (line.startsWith('packages/common/log/log_impl')) {
       return true;
     }
 

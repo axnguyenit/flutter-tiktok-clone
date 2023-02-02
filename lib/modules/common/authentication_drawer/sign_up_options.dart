@@ -1,5 +1,5 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
 import 'package:tiktok/blocs/blocs.dart';
 import 'package:tiktok/constants/constants.dart';
 import 'package:tiktok/widgets/widgets.dart';

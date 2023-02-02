@@ -1,4 +1,4 @@
-library core;
+library common;
 
 import 'log/log.dart';
 import 'log/log_impl.dart';

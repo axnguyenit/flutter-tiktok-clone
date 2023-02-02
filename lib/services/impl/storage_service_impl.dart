@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:common/common.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:shared/shared.dart';
 import 'package:tiktok/services/services.dart';
 import 'package:tiktok/utils/file.dart';
 

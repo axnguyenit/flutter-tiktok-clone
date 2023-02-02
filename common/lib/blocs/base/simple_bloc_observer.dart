@@ -1,4 +1,4 @@
-import 'package:shared/shared.dart';
+import 'package:common/common.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SimpleBlocObserver extends BlocObserver {

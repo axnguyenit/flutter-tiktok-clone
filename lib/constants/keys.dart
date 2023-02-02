@@ -14,6 +14,10 @@ class _Blocs {
   final sessionBloc = const Key('session_bloc');
 
   final authenticationDrawerBloc = const Key('authentication_drawer_bloc');
+
+  final deeplinkBloc = const Key('deep_link_bloc');
+
+  final messagingBloc = const Key('messaging_bloc');
 }
 
 class _Broadcast {

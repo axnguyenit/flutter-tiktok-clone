@@ -1,12 +1,25 @@
-import 'package:shared/shared.dart';
+import 'dart:async';
+
+import 'package:common/common.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+typedef BlocConstructor<T extends BaseBloc> = T Function();
 
 class RetryEvent {
   final Key key;
   final Object event;
+  final Key _retryOnKey;
+  final Duration? delay;
 
-  RetryEvent({required this.key, required this.event});
+  Key get retryOnKey => _retryOnKey;
+
+  RetryEvent({
+    required this.key,
+    required this.event,
+    this.delay,
+    Key? retryOnKey,
+  }) : _retryOnKey = retryOnKey ?? key;
 }
 
 class EventBus {
@@ -27,20 +40,24 @@ class EventBus {
     _retryEvents = [];
   }
 
-  T newBlocWithConstructor<T extends BaseBloc>(Key key, T constructor) {
+  T newBlocWithConstructor<T extends BaseBloc>(
+    Key key,
+    BlocConstructor<T> constructor,
+  ) {
     final found = _blocs.indexWhere((b) => b.key == key);
     if (found >= 0 && _blocs[found] is T) {
       return _blocs[found] as T;
     }
 
     try {
+      final T newInstance = constructor();
       log.trace('New Bloc is created with key = $key');
-      _blocs.add(constructor);
-      if (constructor.subscribes().isNotEmpty) {
-        _broadcasts.addAll(constructor.subscribes());
+      _blocs.add(newInstance);
+      if (newInstance.subscribes().isNotEmpty) {
+        _broadcasts.addAll(newInstance.subscribes());
       }
-      _retryEvent<T>(key);
-      return constructor;
+      unawaited(_retryEvent<T>(key));
+      return newInstance;
     } catch (e) {
       log.error('Error in new instance of bloc $key: $e');
     }
@@ -55,11 +72,17 @@ class EventBus {
     return null;
   }
 
-  void event<T extends BaseBloc>(Key key, Object event,
-      {bool retryLater = false, Duration? delay}) {
+  void event<T extends BaseBloc>(
+    Key key,
+    Object event, {
+    bool retryLater = false,
+    Key? retryOnKey,
+    Duration? delay,
+  }) {
     try {
       final found = _blocs.indexWhere((b) => b.key == key);
-      if (found >= 0 && _blocs[found] is T) {
+      final checkKindOfBloc = retryOnKey == null || key == retryOnKey;
+      if (found >= 0 && (!checkKindOfBloc || _blocs[found] is T)) {
         if (delay != null) {
           Future.delayed(delay, () {
             _blocs[found].add(event);
@@ -68,8 +91,16 @@ class EventBus {
           _blocs[found].add(event);
         }
       } else {
+        log.error('Cannot found bloc with key $key for event $event');
         if (retryLater) {
-          _retryEvents.add(RetryEvent(key: key, event: event));
+          _retryEvents.add(
+            RetryEvent(
+              key: key,
+              event: event,
+              delay: delay,
+              retryOnKey: retryOnKey,
+            ),
+          );
         }
       }
     } catch (e) {
@@ -97,18 +128,24 @@ class EventBus {
     });
   }
 
-  void _retryEvent<T extends BaseBloc>(Key key) {
+  Future<void> _retryEvent<T extends BaseBloc>(Key key) async {
     for (var i = 0; i < _retryEvents.length; i++) {
       final retry = _retryEvents[i];
       if (retry.key == key) {
-        event<T>(retry.key, retry.event);
-        _retryEvents.removeAt(i);
+        if (retry.delay != null) {
+          Future.delayed(retry.delay!, () {
+            event<T>(retry.key, retry.event);
+            _retryEvents.removeAt(i);
+          });
+        } else {
+          event<T>(retry.key, retry.event);
+          _retryEvents.removeAt(i);
+        }
         break;
       }
     }
   }
 
-  // support methods
   void cleanUp({Key? parentKey}) {
     final removedKeys = <Key>[];
     final closeKey = parentKey ?? const ValueKey('none_dispose_bloc');

@@ -1,3 +1,5 @@
+import 'package:tiktok/enums/enums.dart';
+
 import 'entity.dart';
 
 class UserModel extends Entity {
@@ -9,6 +11,8 @@ class UserModel extends Entity {
   final int likes;
   final String avatar;
   final String fullName;
+  final AuthProvider provider;
+  final List<String> deviceTokens;
 
   UserModel({
     required this.uid,
@@ -19,6 +23,8 @@ class UserModel extends Entity {
     required this.likes,
     required this.avatar,
     required this.fullName,
+    required this.provider,
+    required this.deviceTokens,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -33,6 +39,10 @@ class UserModel extends Entity {
       likes: json['likes'] as int,
       avatar: json['avatar'] as String,
       fullName: json['fullName'] as String,
+      provider: AuthProvider.fromKey(json['provider']),
+      deviceTokens:
+          List<String>.from(json['deviceTokens'].map((e) => e as String))
+              .toList(),
     );
   }
 
@@ -47,6 +57,8 @@ class UserModel extends Entity {
       'likes': likes,
       'avatar': avatar,
       'fullName': fullName,
+      'provider': provider.value,
+      'deviceTokens': deviceTokens,
     };
   }
 

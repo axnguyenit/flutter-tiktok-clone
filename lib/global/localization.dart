@@ -1,11 +1,11 @@
 import 'dart:convert';
 
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tiktok/models/models.dart';
-import 'package:shared/shared.dart';
 // ignore: depend_on_referenced_packages
 import 'package:sprintf/sprintf.dart';
+import 'package:tiktok/models/models.dart';
 
 class SLocalizationsDelegate extends LocalizationsDelegate<S> {
   const SLocalizationsDelegate();

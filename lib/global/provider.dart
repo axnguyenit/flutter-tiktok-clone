@@ -18,4 +18,6 @@ class Provider {
       AuthenticationServiceImpl();
 
   StorageService get storageService => StorageServiceImpl();
+
+  UserService get userService => UserServiceImpl();
 }

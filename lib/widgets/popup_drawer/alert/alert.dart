@@ -1,9 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:common/common.dart';
+import 'package:flutter/material.dart';
 import 'package:tiktok/constants/constants.dart';
 import 'package:tiktok/widgets/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
 
 class Alert extends StatelessWidget {
   final Widget? icon;

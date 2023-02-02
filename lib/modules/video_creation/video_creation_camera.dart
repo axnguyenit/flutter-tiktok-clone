@@ -3,8 +3,8 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:camera/camera.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
 import 'package:tiktok/blocs/mixins/mixins.dart';
 import 'package:tiktok/constants/constants.dart';
 import 'package:tiktok/global/global.dart';

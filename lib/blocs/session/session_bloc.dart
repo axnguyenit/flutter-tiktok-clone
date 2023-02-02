@@ -1,4 +1,4 @@
-import 'package:shared/shared.dart';
+import 'package:common/common.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +28,7 @@ class SessionBloc extends BaseBloc<SessionEvent, SessionState> {
 
     return EventBus().newBlocWithConstructor<SessionBloc>(
       key,
-      SessionBloc(
+      () => SessionBloc(
         key,
         authenticationService: Provider().authenticationService,
       ),

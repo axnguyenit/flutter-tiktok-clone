@@ -1,4 +1,4 @@
-import 'package:shared/animated/animated_controller.dart';
+import 'package:common/animated/animated.dart';
 import 'package:flutter/material.dart';
 
 class FlickerTransition extends StatefulWidget {

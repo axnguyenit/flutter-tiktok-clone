@@ -1,3 +1,5 @@
+enum Screen { example, invalid }
+
 enum Screens {
   home,
   signIn,

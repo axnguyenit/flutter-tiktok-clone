@@ -6,3 +6,6 @@ export 'impl/session_service_impl.dart';
 
 export 'storage_service.dart';
 export 'impl/storage_service_impl.dart';
+
+export 'user_service.dart';
+export 'impl/user_service_impl.dart';

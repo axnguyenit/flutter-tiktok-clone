@@ -1,7 +1,7 @@
+import 'package:common/common.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared/shared.dart';
 import 'package:tiktok/constants/constants.dart';
 import 'package:tiktok/global/global.dart';
 import 'package:tiktok/services/services.dart';
@@ -25,7 +25,7 @@ class AuthenticationBloc
 
     return EventBus().newBlocWithConstructor<AuthenticationBloc>(
       key,
-      AuthenticationBloc(
+      () => AuthenticationBloc(
         key,
         authenticationService: Provider().authenticationService,
       ),
