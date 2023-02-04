@@ -8,6 +8,7 @@ enum AppIcons {
   kakaotalk,
   line,
   twitter,
+  heart,
 }
 
 const _AppIconsAsset = {
@@ -18,6 +19,7 @@ const _AppIconsAsset = {
   AppIcons.kakaotalk: 'assets/icons/kakaotalk.svg',
   AppIcons.line: 'assets/icons/line.svg',
   AppIcons.twitter: 'assets/icons/twitter.svg',
+  AppIcons.heart: 'assets/icons/heart.svg',
 };
 
 extension AppIconsExtension on AppIcons {

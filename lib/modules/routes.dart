@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktok/blocs/blocs.dart';
 import 'package:tiktok/constants/constants.dart';
+import 'package:tiktok/modules/main/main_screen.dart';
 
 import 'error/error_screen.dart';
-import 'main/main_screen.dart';
 import 'splash/splash_screen.dart';
 import 'video_creation/video_creation_screen.dart';
 
@@ -35,9 +35,17 @@ class AppRouter {
         GoRoute(
           path: Screens.home.toPath,
           name: Screens.home.toName,
-          builder: (context, state) => BlocProvider<AuthenticationBloc>(
-            lazy: false,
-            create: (context) => AuthenticationBloc.instance(),
+          builder: (context, state) => MultiBlocProvider(
+            providers: [
+              BlocProvider<AuthenticationBloc>(
+                lazy: false,
+                create: (context) => AuthenticationBloc.instance(),
+              ),
+              // BlocProvider<VideoListBloc>(
+              //   lazy: false,
+              //   create: (context) => VideoListBloc(),
+              // ),
+            ],
             child: const MainScreen(),
           ),
         ),

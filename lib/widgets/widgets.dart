@@ -1,12 +1,14 @@
 export 'app_icon/app_icon.dart';
+export 'app_loading/app_loading.dart';
 export 'avatar/x_avatar.dart';
 export 'bottom_drawer/bottom_drawer.dart';
 export 'button/ink_well_button.dart';
 export 'button/x_button.dart';
 export 'button/x_icon_button.dart';
 export 'button/x_link_button.dart';
+export 'circle_animation/circle_animation.dart';
 export 'image/x_image_network.dart';
 export 'popup_drawer/base_popup_drawer.dart';
 export 'span_label/span_label.dart';
 export 'text/x_text.dart';
-export 'app_loading/app_loading.dart';
+export 'video_player/video_player.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok/constants/constants.dart';
 import 'package:tiktok/modules/home/home_screen.dart';
+// import 'package:tiktok/modules/home/video_list_screen.dart';
 import 'package:tiktok/modules/inbox/inbox_screen.dart';
 import 'package:tiktok/modules/profile/unauthenticated_profile_screen.dart';
-import 'package:tiktok/modules/shop/shop_screen.dart';
 
 enum BottomBar { home, shop, inbox, profile }
 
@@ -43,7 +43,7 @@ extension BottomBarExtension on BottomBar {
       case BottomBar.home:
         return const HomeScreen();
       case BottomBar.shop:
-        return const ShopScreen();
+        return const SizedBox();
       case BottomBar.inbox:
         return const InboxScreen();
       case BottomBar.profile:

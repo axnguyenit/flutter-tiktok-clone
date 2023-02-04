@@ -36,11 +36,16 @@ class Messaging {
 
   static void startListening() {
     FirebaseMessaging.onMessage.listen((message) {
-      log.info('Message onReceive >> ${message.data}');
+      log.info('Message onReceive >> $message');
+      // trigger when open app
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((message) async {
       log.info('Open Message onReceive >>>> ${message.data}');
+    });
+
+    FirebaseMessaging.onBackgroundMessage((message) async {
+      log.info('onBackgroundMessage >>>> ${message.data}');
     });
   }
 
