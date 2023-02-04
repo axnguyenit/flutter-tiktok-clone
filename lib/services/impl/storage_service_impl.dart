@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:common/common.dart';
-import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:tiktok/services/services.dart';
 import 'package:tiktok/utils/file.dart';
@@ -73,7 +72,7 @@ class StorageServiceImpl implements StorageService {
         }
       });
       return completer.future;
-    } on firebase_core.FirebaseException catch (e) {
+    } on FirebaseException catch (e) {
       log.error('Firebase Exception Error >> $e');
     } catch (e) {
       log.error('Upload File Error >> $e');
